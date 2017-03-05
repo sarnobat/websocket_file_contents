@@ -45,7 +45,7 @@ public class WebSocketServerJetty {
 							connection.close();
 						}
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(3000);
 						} catch(Exception e){ 
 							throw new RuntimeException(e);
 						}
@@ -69,7 +69,7 @@ public class WebSocketServerJetty {
 					while(!object.readLine().isEmpty()  && counter < n_lines) {
 						System.out.println("hi");
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(2000);
 						} catch(Exception e){ 
 							throw new RuntimeException(e);
 						}
