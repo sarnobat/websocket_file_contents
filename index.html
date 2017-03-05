@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+function connect() {
+     // Let us open a web socket
+     var webSocket = new WebSocket("ws://localhost:8081/");
+     webSocket.onopen = function() {
+        // Web Socket is connected, send data using send()
+        var msg = "Hi, my name is index.html.";
+        webSocket.send(msg);
+        alert("Message sent from client: " + msg);
+     };
+     webSocket.onmessage = function (evt) { 
+        var received_msg = evt.data;
+        alert("Message received from server: " +  received_msg);
+     };
+     webSocket.onclose = function() { 
+        alert("Connection closed by server"); 
+     };
+}
+</script>
+</head>
+<body>
+	<a href="javascript:connect()">Connect, and tell us your name.</a>
+</body>
+</html>
