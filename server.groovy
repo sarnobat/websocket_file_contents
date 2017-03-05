@@ -30,17 +30,17 @@ public class WebSocketServerJetty {
 				@Override
 				public void onMessage(String data) {
 				
-					File file = new File("/var/log/system.log");
+					File file = new File("/var/log/syslog");
 					int n_lines = 100000;
 					int counter = 0; 
 					ReversedLinesFileReader object = new ReversedLinesFileReader(file);
 					while(!object.readLine().isEmpty()  && counter < n_lines) {
+						System.out.println("hi");
 						try {
 							Thread.sleep(1000);
 						} catch(Exception e){ 
 							throw new RuntimeException(e);
 						}
-						//System.out.println(object.readLine());
 						counter++;
 						System.out.println("onMessage() - data: " + counter);
 						try {
@@ -55,10 +55,11 @@ public class WebSocketServerJetty {
 		}
 
 	}
-
+private static String file ;
 	public static void main(String[] args) {
 		try {
-			Server server = new Server(8081);
+			Server server = new Server(Integer.parseInt(args[0]));
+			file = args[1];
 			WebSocketHandler chatWebSocketHandler = new MyWebSocketHandler();
 			chatWebSocketHandler.setHandler(new DefaultHandler());
 			server.setHandler(chatWebSocketHandler);
