@@ -35,6 +35,11 @@ public class WebSocketServerJetty {
 					int counter = 0; 
 					ReversedLinesFileReader object = new ReversedLinesFileReader(file);
 					while(!object.readLine().isEmpty()  && counter < n_lines) {
+						try {
+							Thread.sleep(1000);
+						} catch(Exception e){ 
+							throw new RuntimeException(e);
+						}
 						//System.out.println(object.readLine());
 						counter++;
 						System.out.println("onMessage() - data: " + counter);
