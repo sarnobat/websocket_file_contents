@@ -30,6 +30,38 @@ public class WebSocketServerJetty {
 				@Override
 				public void onMessage(String data) {
 				
+					BufferedReader br = null;
+					try {
+					  br = new BufferedReader(new InputStreamReader(System.in));
+					  String line;
+					  while ((line = br.readLine()) != null) {
+						// log message
+						System.err.println("[DEBUG] current line is: " + line);
+						// program output
+						System.out.println(line);
+						try {
+							connection.sendMessage(line);
+						} catch (IOException x) {
+							connection.close();
+						}
+						try {
+							Thread.sleep(1000);
+						} catch(Exception e){ 
+							throw new RuntimeException(e);
+						}
+					  }
+					} catch (IOException e) {
+					  e.printStackTrace();
+					} finally {
+					  if (br != null) {
+						try {
+						  br.close();
+						} catch (IOException e) {
+						  e.printStackTrace();
+						}
+					  }
+					}
+/*				
 					File file = new File("/var/log/syslog");
 					int n_lines = 100000;
 					int counter = 0; 
@@ -49,7 +81,7 @@ public class WebSocketServerJetty {
 							connection.close();
 						}
 					}
-
+*/
 				}
 			};
 		}
