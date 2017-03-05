@@ -10,15 +10,15 @@ function connect() {
         // Web Socket is connected, send data using send()
         var msg = "Hi, my name is index.html.";
         webSocket.send(msg);
-        $("#input").append("Message sent from client: " + msg);
+        $("#input").prepend("Message sent from client: " + msg + "<br>");
         //alert();
      };
      webSocket.onmessage = function (evt) { 
         var received_msg = evt.data;
-        $("#output").append("Message received from server: " +  received_msg);
+        $("#output").prepend("Message received from server: " +  received_msg + "<br>");
      };
      webSocket.onclose = function() { 
-        $("#input").append("Connection closed by server");
+        $("#input").prepend("Connection closed by server" + "<br>");
      };
 }
 </script>
