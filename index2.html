@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+<script type="text/javascript">
+function connect() {
+     // Let us open a web socket
+     var webSocket = new WebSocket("ws://netgear.rohidekar.com:44472/");
+     webSocket.onopen = function() {
+        // Web Socket is connected, send data using send()
+        var msg = "Hi, my name is index.html.";
+        webSocket.send(msg);
+        $("#input").prepend("Message sent from client: " + msg + "<br>");
+        //alert();
+     };
+     webSocket.onmessage = function (evt) { 
+        var received_msg = evt.data;
+        $("#output").prepend("Message received from server: " +  received_msg + "<br>");
+     };
+     webSocket.onclose = function() { 
+        $("#input").prepend("Connection closed by server" + "<br>");
+     };
+}
+</script>
+</head>
+<body onload="connect()">
+<!--	<button onclick="javascript:connect()">Get from server</button>-->
+	<h3>Output</h3>
+	<div id="output">
+	</div>
+	<h3>Input</h3>
+	<div id="input">
+	</div>
+</body>
+</html>
