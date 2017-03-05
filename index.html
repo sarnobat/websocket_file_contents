@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
 <script type="text/javascript">
 function connect() {
      // Let us open a web socket
@@ -9,19 +10,26 @@ function connect() {
         // Web Socket is connected, send data using send()
         var msg = "Hi, my name is index.html.";
         webSocket.send(msg);
-        alert("Message sent from client: " + msg);
+        $("#input").append("Message sent from client: " + msg);
+        //alert();
      };
      webSocket.onmessage = function (evt) { 
         var received_msg = evt.data;
-        alert("Message received from server: " +  received_msg);
+        $("#output").append("Message received from server: " +  received_msg);
      };
      webSocket.onclose = function() { 
-        alert("Connection closed by server"); 
+        $("#input").append("Connection closed by server");
      };
 }
 </script>
 </head>
 <body>
-	<a href="javascript:connect()">Connect, and tell us your name.</a>
+	<button onclick="javascript:connect()">Get from server</button>
+	<h3>Input</h3>
+	<div id="input">
+	</div>
+	<h3>Output</h3>
+	<div id="output">
+	</div>
 </body>
 </html>
