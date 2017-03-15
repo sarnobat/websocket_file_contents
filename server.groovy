@@ -98,7 +98,9 @@ private static String file ;
 			server.start();
 			server.join();
 		} catch (Throwable e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.err.println("problem: " + e.getMessage());
+			System.exit(-1);
 		}
 	}
 
